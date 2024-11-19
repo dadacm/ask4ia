@@ -16,9 +16,9 @@ export default function QuestionsScreen() {
         />
       }>
       <ThemedView className="flex-row items-center gap-2">
-        <ThemedText type="title">Questions</ThemedText>
+        <ThemedText type="title">Perguntas</ThemedText>
       </ThemedView>
-      <ThemedText className="text-base">Browse through all available questions.</ThemedText>
+      <ThemedText className="text-base">Navegue por todas as perguntas disponíveis.</ThemedText>
     </ParallaxScrollView>
   );
 } 

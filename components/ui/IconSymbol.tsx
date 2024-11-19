@@ -11,12 +11,8 @@ const MAPPING = {
   'list.bullet': 'format-list-bulleted',
   'star.fill': 'star',
   'chevron.right': 'chevron-right',
-} as Partial<
-  Record<
-    import('expo-symbols').SymbolViewProps['name'],
-    React.ComponentProps<typeof MaterialIcons>['name']
-  >
->;
+  'arrow.up.circle.fill': 'send',
+} as const;
 
 export type IconSymbolName = keyof typeof MAPPING;
 
@@ -30,6 +26,7 @@ export function IconSymbol({
   size = 24,
   color,
   style,
+  weight,
 }: {
   name: IconSymbolName;
   size?: number;

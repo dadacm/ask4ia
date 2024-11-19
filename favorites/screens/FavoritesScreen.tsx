@@ -16,9 +16,9 @@ export default function FavoritesScreen() {
         />
       }>
       <ThemedView className="flex-row items-center gap-2">
-        <ThemedText type="title">Favorites</ThemedText>
+        <ThemedText type="title">Favoritos</ThemedText>
       </ThemedView>
-      <ThemedText className="text-base">Your favorite questions will appear here.</ThemedText>
+      <ThemedText className="text-base">Suas perguntas favoritas aparecerão aqui.</ThemedText>
     </ParallaxScrollView>
   );
 } 
