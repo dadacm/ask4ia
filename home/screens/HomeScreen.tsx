@@ -4,23 +4,40 @@ import { ThemedView } from '@/base/components/ThemedView';
 import { Button } from '@/base/components/ui/Button';
 import { IconSymbol } from '@/base/components/ui/IconSymbol';
 import { TextArea } from '@/base/components/ui/TextArea';
+import { useStorage } from '@/base/hooks/useStorage';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
+import { NewQuestionInterface } from './types/HomeScreen.types';
 
 export default function HomeScreen() {
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
+  const { saveData, getData } = useStorage<NewQuestionInterface[]>('questions');
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!question.trim()) return;
     setLoading(true);
-    // Aqui você pode adicionar a lógica para enviar a pergunta
-    setTimeout(() => {
-      setLoading(false);
-      router.push(`/questionDetails/${encodeURIComponent('id123')}`);
+
+    const newQuestion: NewQuestionInterface = {
+      id: Date.now().toString(),
+      text: question.trim(),
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const existingQuestions = (await getData()) || [];
+
+      const updatedQuestions = [...existingQuestions, newQuestion];
+
+      await saveData(updatedQuestions);
+      router.push(`/questionDetails/${encodeURIComponent(newQuestion.id)}`);
       setQuestion('');
-    }, 1000);
+    } catch (error) {
+      console.error('Erro ao salvar a pergunta:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

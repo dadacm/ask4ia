@@ -2,10 +2,24 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@base/*": ["./base/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@base/*": [
+        "./base/*"
+      ],
+      "@env": [
+        "node_modules/react-native-dotenv"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "nativewind-env.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "nativewind-env.d.ts",
+    "base/types/reactotron.d.ts",
+    "base/types/env.d.ts"
+  ]
 }
