@@ -1,9 +1,10 @@
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { Button } from '@/components/ui/Button';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import { TextArea } from '@/components/ui/TextArea';
+import ParallaxScrollView from '@/base/components/ParallaxScrollView';
+import { ThemedText } from '@/base/components/ThemedText';
+import { ThemedView } from '@/base/components/ThemedView';
+import { Button } from '@/base/components/ui/Button';
+import { IconSymbol } from '@/base/components/ui/IconSymbol';
+import { TextArea } from '@/base/components/ui/TextArea';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
@@ -17,13 +18,14 @@ export default function HomeScreen() {
     // Aqui você pode adicionar a lógica para enviar a pergunta
     setTimeout(() => {
       setLoading(false);
+      router.push(`/questionDetails/${encodeURIComponent('id123')}`);
       setQuestion('');
     }, 1000);
   };
 
   return (
     <ParallaxScrollView
-      className="flex-1 bg-red-500"
+      className="flex-1"
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       headerImage={
         <IconSymbol
@@ -34,14 +36,14 @@ export default function HomeScreen() {
         />
       }
     >
-      <View className="flex-1 bg-blue-500">
+      <ThemedView className="flex-1 ">
         <ThemedView className="flex-row items-center gap-2">
           <ThemedText type="title">Início</ThemedText>
         </ThemedView>
         <ThemedText className="text-base">Faça suas perguntas aqui.</ThemedText>
 
-        <View className=" flex-1 bg-red-500">
-          <View className="flex-row flex-1 self-end items-end gap-4 bg-black">
+        <View className="flex-1 justify-end">
+          <View className="flex-row items-end gap-4">
             <TextArea
               className="flex-1"
               placeholder="Pergunte aqui..."
@@ -51,7 +53,7 @@ export default function HomeScreen() {
             />
             <Button
               variant="icon-only"
-              title="Send"
+              title="Enviar"
               icon={{ name: 'arrow.up.circle.fill', size: 20 }}
               onPress={handleSubmit}
               loading={loading}
@@ -59,7 +61,7 @@ export default function HomeScreen() {
             />
           </View>
         </View>
-      </View>
+      </ThemedView>
     </ParallaxScrollView>
   );
 }

@@ -1,7 +1,7 @@
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import ParallaxScrollView from '@/base/components/ParallaxScrollView';
+import { ThemedText } from '@/base/components/ThemedText';
+import { ThemedView } from '@/base/components/ThemedView';
+import { IconSymbol } from '@/base/components/ui/IconSymbol';
 
 export default function FavoritesScreen() {
   return (
@@ -14,11 +14,12 @@ export default function FavoritesScreen() {
           name="star.fill"
           style={{ position: 'absolute', bottom: -90, left: -35 }}
         />
-      }>
+      }
+    >
       <ThemedView className="flex-row items-center gap-2">
         <ThemedText type="title">Favoritos</ThemedText>
       </ThemedView>
       <ThemedText className="text-base">Suas perguntas favoritas aparecerão aqui.</ThemedText>
     </ParallaxScrollView>
   );
-} 
+}

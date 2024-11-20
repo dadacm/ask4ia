@@ -5,8 +5,21 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'no-unused-vars': 'off', // Desabilita a regra base
-    '@typescript-eslint/no-unused-vars': ['error'], // Habilita a regra do TypeScript
-    'import/no-unused-modules': [1, { unusedExports: true }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        // Permite variáveis que começam com _
+        argsIgnorePattern: '^_',
+        // Ignora variáveis usadas apenas em tipos
+        varsIgnorePattern: '^_',
+        // Não reclama de exports não utilizados
+        ignoreExports: true,
+      },
+    ],
+    // Remove a regra que verifica módulos não utilizados
+    'import/no-unused-modules': 'off',
+    // Apenas avisa sobre imports não utilizados dentro dos arquivos
+    'unused-imports/no-unused-imports': 'error',
   },
   parserOptions: {
     ecmaVersion: 'latest',
