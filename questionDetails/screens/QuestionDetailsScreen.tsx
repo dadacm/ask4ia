@@ -1,4 +1,5 @@
 import ParallaxScrollView from '@/base/components/ParallaxScrollView';
+import QuestionCard from '@/base/components/QuestionCard';
 import { ThemedText } from '@/base/components/ThemedText';
 import { ThemedView } from '@/base/components/ThemedView';
 import { IconSymbol } from '@/base/components/ui/IconSymbol';
@@ -19,6 +20,7 @@ export default function QuestionDetailsScreen() {
       const questions = (await getData()) || [];
       const foundQuestion = questions.find(q => q.id === id);
       if (foundQuestion) {
+        setQuestion(foundQuestion);
         fetchAnswer(foundQuestion.text);
       }
     };
@@ -52,20 +54,14 @@ export default function QuestionDetailsScreen() {
         />
       }
     >
-      <ThemedView className="flex-1">
+      <ThemedView className="flex-1 ">
         <ThemedView className="flex-row items-center gap-2">
           <ThemedText type="title">Pergunta #{id}</ThemedText>
         </ThemedView>
 
-        {question && (
-          <ThemedView className="mt-4">
-            <ThemedText className="text-base">{question.text}</ThemedText>
-          </ThemedView>
-        )}
+        {question && <QuestionCard isQuestion={true} answer={question.text} />}
 
-        {isLoading && <ThemedText>Gerando resposta...</ThemedText>}
-        {error && <ThemedText>Erro: {error.message}</ThemedText>}
-        {answer && <ThemedText className="text-base">{answer}</ThemedText>}
+        {answer && <QuestionCard isLoading={isLoading} error={error} answer={answer} />}
       </ThemedView>
     </ParallaxScrollView>
   );

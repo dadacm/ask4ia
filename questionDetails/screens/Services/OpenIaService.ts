@@ -22,14 +22,41 @@ export const generateMockResponse = async (prompt: string) => {
     help: 'Como posso ajudar? Esta é uma resposta mock para pedidos de ajuda.',
   };
 
+  let content = mockResponses.default;
   if (prompt.toLowerCase().includes('olá')) {
-    return mockResponses.greeting;
+    content = mockResponses.greeting;
   }
   if (prompt.toLowerCase().includes('ajuda')) {
-    return mockResponses.help;
+    content = mockResponses.help;
   }
 
-  return mockResponses.default;
+  return {
+    id: 'chatcmpl-abc123',
+    object: 'chat.completion',
+    created: 1677858242,
+    model: 'gpt-4o-mini',
+    usage: {
+      prompt_tokens: 13,
+      completion_tokens: 7,
+      total_tokens: 20,
+      completion_tokens_details: {
+        reasoning_tokens: 0,
+        accepted_prediction_tokens: 0,
+        rejected_prediction_tokens: 0,
+      },
+    },
+    choices: [
+      {
+        message: {
+          role: 'assistant',
+          content: content,
+        },
+        logprobs: null,
+        finish_reason: 'stop',
+        index: 0,
+      },
+    ],
+  };
 };
 
 export const generateOpenAIText = async (prompt: string) => {
@@ -46,7 +73,7 @@ export const generateOpenAIText = async (prompt: string) => {
       }
 
       const response = await openAI.post('/chat/completions', {
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o-mini-2024-07-18',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 150,
         temperature: 0.7,
