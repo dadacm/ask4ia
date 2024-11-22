@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# Ask4IA 🤖
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Ask4IA is a React Native mobile application built with Expo that allows users to ask questions and receive AI-powered answers. The app features a clean architecture, modern UI components, and follows best practices for React Native development.
 
-## Get started
+## 🌟 Features
 
-1. Install dependencies
+- Question and answer interface with AI integration
+- Dark/Light theme support
+- Local storage for questions and answers
+- Favorites system
+- Bottom sheet with token usage statistics
+- Parallax scrolling effects
+- Native iOS SF Symbols support with Material Icons fallback
+- Haptic feedback support
 
-   ```bash
-   npm install
-   ```
+## 🛠️ Technologies & Libraries
 
-2. Start the app
+- **Core:**
 
-   ```bash
-    npx expo start
-   ```
+  - [Expo](https://expo.dev/) - Development platform
+  - [React Native](https://reactnative.dev/) - Mobile framework
+  - [TypeScript](https://www.typescriptlang.org/) - Type safety
+  - [Expo Router](https://docs.expo.dev/router/introduction/) - File-based routing
 
-In the output, you'll find options to open the app in a
+- **Styling & UI:**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+  - [NativeWind](https://www.nativewind.dev/) - Tailwind CSS for React Native
+  - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) - Animations
+  - [@gorhom/bottom-sheet](https://gorhom.github.io/react-native-bottom-sheet/) - Bottom sheet component
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **State Management & Storage:**
 
-## Get a fresh project
+  - [AsyncStorage](https://react-native-async-storage.github.io/async-storage/) - Local storage
+  - Custom hooks for state management
 
-When you're ready, run:
+- **Development Tools:**
+  - [ESLint](https://eslint.org/) - Code linting
+  - [Prettier](https://prettier.io/) - Code formatting
+  - [Reactotron](https://github.com/infinitered/reactotron) - Debugging
 
-```bash
-npm run reset-project
-```
+## 🏗️ Architecture & Best Practices
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Directory Structure
