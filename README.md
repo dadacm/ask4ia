@@ -13,6 +13,19 @@ Ask4IA is a React Native mobile application built with Expo that allows users to
 - Native iOS SF Symbols support with Material Icons fallback
 - Haptic feedback support
 
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- iOS Simulator (for iOS development) or Android Emulator (for Android development)
+
+### Installation
+
+1. Clone the repository:
+
 ## 🛠️ Technologies & Libraries
 
 - **Core:**
