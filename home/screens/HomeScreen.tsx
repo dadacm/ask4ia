@@ -31,7 +31,9 @@ export default function HomeScreen() {
       const updatedQuestions = [...existingQuestions, newQuestion];
 
       await saveData(updatedQuestions);
-      router.push(`/questionDetails/${encodeURIComponent(newQuestion.id)}`);
+      router.push(
+        `/questionDetails/${encodeURIComponent(newQuestion.id)}?question=${encodeURIComponent(newQuestion.text)}`
+      );
       setQuestion('');
     } catch (error) {
       console.error('Erro ao salvar a pergunta:', error);

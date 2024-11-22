@@ -29,8 +29,7 @@ export const generateMockResponse = async (prompt: string) => {
   if (prompt.toLowerCase().includes('ajuda')) {
     content = mockResponses.help;
   }
-
-  return {
+  const completeResponse = {
     id: 'chatcmpl-abc123',
     object: 'chat.completion',
     created: 1677858242,
@@ -57,12 +56,12 @@ export const generateMockResponse = async (prompt: string) => {
       },
     ],
   };
+  return { response: completeResponse.choices[0].message.content, usage: completeResponse.usage };
 };
 
 export const generateOpenAIText = async (prompt: string) => {
   const maxRetries = 3;
-  const baseDelay = 20000; // 20 segundos de espera base
-  console.log('prompt', prompt);
+  const baseDelay = 20000;
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
@@ -79,7 +78,7 @@ export const generateOpenAIText = async (prompt: string) => {
         temperature: 0.7,
       });
 
-      return response.data.choices[0].message.content;
+      return { response: response.data.choices[0].message.content, usage: response.data.usage };
     } catch (error: any) {
       if (error?.response?.status === 429) {
         console.log(`Rate limit atingido (429) - Tentativa ${attempt + 1}/${maxRetries}`);
@@ -92,11 +91,8 @@ export const generateOpenAIText = async (prompt: string) => {
         continue;
       }
 
-      // Para outros tipos de erro, lança imediatamente
       console.error('Erro na API:', error?.response?.status, error?.response?.data);
       throw error;
     }
   }
 };
-
-// Função principal que decide qual implementação usar

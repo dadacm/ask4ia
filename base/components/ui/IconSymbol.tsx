@@ -10,6 +10,8 @@ const MAPPING = {
   'house.fill': 'home',
   'list.bullet': 'format-list-bulleted',
   'star.fill': 'star',
+  star: 'star-outline',
+  trash: 'delete',
   'chevron.right': 'chevron-right',
   'arrow.up.circle.fill': 'send',
 } as const;
@@ -34,5 +36,12 @@ export function IconSymbol({
   style?: StyleProp<ViewStyle>;
   weight?: SymbolWeight;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style as StyleProp<TextStyle>} />;
+  return (
+    <MaterialIcons
+      color={color}
+      size={size}
+      name={MAPPING[name]}
+      style={style as StyleProp<TextStyle>}
+    />
+  );
 }

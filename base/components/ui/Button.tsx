@@ -1,17 +1,20 @@
 import { ThemedText } from '@/base/components/ThemedText';
+import React from 'react';
 import { ActivityIndicator, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { IconSymbol } from './IconSymbol';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'icon-only';
 
 export type ButtonProps = TouchableOpacityProps & {
-  title: string;
+  title?: string;
   loading?: boolean;
   variant?: ButtonVariant;
-  icon?: {
-    name: React.ComponentProps<typeof IconSymbol>['name'];
-    size?: number;
-  };
+  icon?:
+    | React.ReactElement
+    | {
+        name: React.ComponentProps<typeof IconSymbol>['name'];
+        size?: number;
+      };
 };
 
 const variants = {
@@ -55,9 +58,20 @@ export function Button({
       {loading ? (
         <ActivityIndicator color={variantStyles.loading} />
       ) : variant === 'icon-only' && icon ? (
-        <IconSymbol name={icon.name} size={icon.size ?? 24} color="#fff" />
+        React.isValidElement(icon) ? (
+          icon
+        ) : (
+          <IconSymbol
+            name={(icon as { name: React.ComponentProps<typeof IconSymbol>['name'] }).name}
+            size={(icon as { size?: number }).size ?? 24}
+            color="#fff"
+          />
+        )
       ) : (
-        <ThemedText className={variantStyles.text}>{title}</ThemedText>
+        <>
+          {React.isValidElement(icon) && icon}
+          {title && <ThemedText className={variantStyles.text}>{title}</ThemedText>}
+        </>
       )}
     </TouchableOpacity>
   );
