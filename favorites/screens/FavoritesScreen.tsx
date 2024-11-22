@@ -6,7 +6,7 @@ import { IconSymbol } from '@/base/components/ui/IconSymbol';
 import { FavoriteQuestion, FavoriteService } from '@/favorites/services/FavoriteService';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -15,6 +15,9 @@ import Animated, {
 
 export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState<FavoriteQuestion[]>([]);
+  const [displayedFavorites, setDisplayedFavorites] = useState<FavoriteQuestion[]>([]);
+  const [page, setPage] = useState(1);
+  const itemsPerPage = Platform.select({ ios: 8, android: 5, default: 5 });
   const scrollOffset = useSharedValue(0);
   const scrollRef = useAnimatedRef<Animated.FlatList<FavoriteQuestion>>();
 
@@ -27,6 +30,19 @@ export default function FavoritesScreen() {
   const loadFavorites = async () => {
     const storedFavorites = await FavoriteService.getFavorites();
     setFavorites(storedFavorites);
+    setDisplayedFavorites(storedFavorites.slice(0, itemsPerPage));
+  };
+
+  const loadMoreFavorites = () => {
+    const nextPage = page + 1;
+    const startIndex = page * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    const newItems = favorites.slice(0, endIndex);
+    if (newItems.length > displayedFavorites.length) {
+      setDisplayedFavorites(newItems);
+      setPage(nextPage);
+    }
   };
 
   useFocusEffect(
@@ -88,16 +104,18 @@ export default function FavoritesScreen() {
             ListHeaderComponentStyle={{ marginTop: 32 }}
             ref={scrollRef}
             onScroll={scrollHandler}
-            initialNumToRender={5}
+            initialNumToRender={itemsPerPage}
             maxToRenderPerBatch={3}
             windowSize={5}
             removeClippedSubviews={true}
-            data={favorites}
+            data={displayedFavorites}
             renderItem={renderFavorite}
             keyExtractor={keyExtractor}
             showsVerticalScrollIndicator={false}
             getItemLayout={getItemLayout}
             updateCellsBatchingPeriod={50}
+            onEndReached={loadMoreFavorites}
+            onEndReachedThreshold={0.5}
           />
         )}
       </ThemedView>
